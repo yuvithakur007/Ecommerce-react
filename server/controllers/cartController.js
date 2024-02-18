@@ -1,41 +1,104 @@
-const CartItem = require('../models/CartItem');
+const User = require('../models/User');
+const jwt = require('jsonwebtoken');
 
-// Controller function to get user's cart items
-exports.getCartItems = async (req, res) => {
+exports.getUserCart = async (req, res) => {
   try {
-    // Assuming the user ID is available in req.user.id after authentication
-    const cartItems = await CartItem.find({ user: req.user.id }).populate('product');
+    const token = req.headers.authorization;
+    const decodedToken = jwt.verify(token, "knolskape");
+    const userId = decodedToken.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Extract and return the user's cart items
+    const cartItems = user.cart;
     res.json(cartItems);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error fetching user cart:", error);
+    res.status(500).json({ message: "Server Error" });
   }
 };
 
-// Controller function to add item to cart
 exports.addToCart = async (req, res) => {
-  const { productId, quantity, totalPrice } = req.body;
-
-  const cartItem = new CartItem({
-    product: productId,
-    quantity,
-    totalPrice,
-    user: req.user.id, // Assuming the user ID is available in req.user.id after authentication
-  });
-
   try {
-    const newCartItem = await cartItem.save();
-    res.status(201).json(newCartItem);
+    const token = req.headers.authorization;
+    const decodedTeken = jwt.verify(token, "knolskape");
+    const userId = decodedTeken.userId;
+    const user = await User.findById(userId);
+    if (!user.cart.includes(req.body.id)) {
+      user.cart.push(req.body.id);
+      await user.save();
+
+      res.status(200).json({
+        ok: true,
+        message: "Product added to cart",
+      });
+    } else {
+      console.log("ID already present in the cart. Not adding again.");
+
+      res.status(200).json({
+        ok: true,
+        message: "ID already present in the cart. Not adding again.",
+      })
+    }
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error("Error adding product to cart:", error);
+    res.status(500).json({ ok: false, message: "Internal server error" });
   }
 };
 
-// Controller function to remove item from cart
-exports.removeFromCart = async (req, res) => {
+
+exports.deleteFromCart = async (req, res) => {
   try {
-    await CartItem.findByIdAndRemove(req.params.id);
-    res.json({ message: 'Item removed from cart' });
+    const token = req.headers.authorization;
+    const decodedToken = jwt.verify(token, "knolskape");
+    const userId = decodedToken.userId;
+
+    const user = await User.findById(userId);
+    const itemId = req.params.id; 
+
+    // Check if the user's cart includes the item
+    const index = user.cart.indexOf(itemId);
+    if (index !== -1) {
+      user.cart.splice(index, 1);
+      await user.save();
+      res.status(200).json({ ok: true, message: "Product removed from cart"});
+    } else {
+      res.status(404).json({ ok: false, message: "Item not found in cart" });
+    }
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error("Error removing product from cart:", error);
+    res.status(500).json({ ok: false, message: "Internal server error" });
   }
 };
+
+
+
+
+
+
+
+
+
+// Place order (move all items from cart to orders)
+// exports.placeOrder = async (req, res) => {
+//   try {
+//     const token = req.headers.authorization;
+//     const decodedToken = jwt.verify(token, "knolskape");
+//     const userId = decodedToken.userId;
+//     // Find the user by ID
+//     const user = await User.findById(userId);
+
+//     // Move all items from cart to orders
+//     user.orders = user.orders.concat(user.cart);
+//     user.cart = [];
+//     await user.save();
+    
+//     res.json({ message: 'Order placed successfully' });
+//   } catch (error) {
+//     console.error('Error placing order:', error);
+//     res.status(500).json({ message: 'Server error' });
+//   }
+// };

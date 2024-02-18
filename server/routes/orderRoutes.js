@@ -1,11 +1,10 @@
+// routes/orderRoutes.js
+
 const express = require('express');
 const router = express.Router();
-const orderController = require('../controllers/orderController');
+const {getAllOrders,placeOrder} = require('../controllers/orderController');
 
-// Route to get user's orders
-router.get('/orders', orderController.getUserOrders);
-
-// Route to place a new order
-router.post('/orders/place', orderController.placeOrder);
+router.post('/place-order', placeOrder);
+router.get('/', getAllOrders);
 
 module.exports = router;

@@ -1,30 +1,49 @@
-const Order = require('../models/Order');
+// controllers/orderController.js
+const User = require("../models/User");
+const jwt = require("jsonwebtoken");
 
-// Controller function to get user's orders
-exports.getUserOrders = async (req, res) => {
+exports.placeOrder = async (req, res) => {
   try {
-    // Assuming the user ID is available in req.user.id after authentication
-    const orders = await Order.find({ user: req.user.id }).populate('items');
-    res.json(orders);
+    const token = req.headers.authorization;
+    const decodedToken = jwt.verify(token, "knolskape");
+    const userId = decodedToken.userId;
+    
+    const user = await User.findById(userId);
+
+    // Check if the cart is empty
+    if (user.cart.length === 0) {
+      return res.status(400).json({ message: 'cart is empty' });
+    }
+
+    // Move all items from cart to orders
+    user.orders = user.orders.concat(user.cart);
+    user.cart = [];
+
+    await user.save();
+
+    res.json({ message: 'Order placed successfully' });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error('Error placing order:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };
 
-// Controller function to place a new order
-exports.placeOrder = async (req, res) => {
-  const { items, totalAmount } = req.body;
-
-  const order = new Order({
-    user: req.user.id, // Assuming the user ID is available in req.user.id after authentication
-    items,
-    totalAmount,
-  });
-
+exports.getAllOrders = async (req, res) => {
   try {
-    const newOrder = await order.save();
-    res.status(201).json(newOrder);
+    const token = req.headers.authorization;
+    const decodedToken = jwt.verify(token, "knolskape");
+    const userId = decodedToken.userId;
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const orders = user.orders;
+    res.json(orders);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error("Error fetching user orders:", error);
+    res.status(500).json({ message: "Server Error" });
   }
 };

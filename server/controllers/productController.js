@@ -1,44 +1,26 @@
 const Product = require('../models/Product');
 
-// Controller function to get all products
+// Fetch all products
 exports.getAllProducts = async (req, res) => {
   try {
     const products = await Product.find();
     res.json(products);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({ message: 'Server Error' });
   }
 };
 
-// Controller function to get product by ID
-exports.getProductById = async (req, res) => {
+// Fetch a single product by ID
+exports.getProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    if (product) {
-      res.json(product);
-    } else {
-      res.status(404).json({ message: 'Product not found' });
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
     }
+    res.json(product);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.error(error);
+    res.status(500).json({ message: 'Server Error' });
   }
 };
 
-// Controller function to add a new product
-exports.addProduct = async (req, res) => {
-  const product = new Product({
-    name: req.body.name,
-    description: req.body.description,
-    image: req.body.image,
-    price: req.body.price,
-    category: req.body.category,
-    avgRating: req.body.avgRating || 0,
-  });
-
-  try {
-    const newProduct = await product.save();
-    res.status(201).json(newProduct);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
-};
