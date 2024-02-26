@@ -29,7 +29,7 @@ const ProductDetails = () => {
   const handleClick = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:8080/api/user/additem", {
+    fetch("http://localhost:8080/api/carts/additem", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

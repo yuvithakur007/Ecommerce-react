@@ -1,39 +1,15 @@
-// /src/components/Header.js
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useEffect } from 'react';
 import '../styles/header.css';
 
 
-const Header = () => {
-  // Dummy categories and sorting options
-  const categories = ['All', 'Electronics', 'Clothing', 'Books'];
-  const sortingOptions = ['Price: Low to High', 'Price: High to Low', 'Rating: Low to High', 'Rating: High to Low'];
-
-  const handleSearch = (e) => {
-    // Handle search functionality
-    const searchTerm = e.target.value;
-    console.log('Search term:', searchTerm);
-  };
-
-  const handleFilterByCategory = (category) => {
-    // Handle filtering by category
-    console.log('Filtering by category:', category);
-  };
-
-  const handleSortBy = (option) => {
-    // Handle sorting products
-    console.log('Sorting by:', option);
-  };
-
+const Header = ({handleSearch,handleSortBy, handleFilterByCategory}) => {
+  const categories = ['All', 'smartphones', 'laptops', 'fragrances','skincare'];
+  const sortingOptions = ['None','Price: Low to High', 'Price: High to Low', 'Rating: Low to High', 'Rating: High to Low'];
 
 
 const [data, setdata] = useState(null)
-
-
-
-
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -51,7 +27,7 @@ const [data, setdata] = useState(null)
             }
           );
           const res = await response.json();
-            // console.log(res);
+          // cont name= res.
            setdata(res);
         }
       } catch (error) {
@@ -60,7 +36,6 @@ const [data, setdata] = useState(null)
     };
     fetchProducts();
   }, []);
-
 
   return (
     <header>
@@ -77,21 +52,20 @@ const [data, setdata] = useState(null)
       <div className='product-display'>
         <input type="text" placeholder="Search products..." onChange={handleSearch} />
           
-        <select onChange={(e) => handleFilterByCategory(e.target.value)}>
+        <select onChange={handleFilterByCategory}>
           {categories.map((category, index) => (
             <option key={index} value={category}>{category}</option>
           ))}
         </select>
   
-        <select onChange={(e) => handleSortBy(e.target.value)}>
+        <select onChange={handleSortBy}>
           {sortingOptions.map((option, index) => (
             <option key={index} value={option}>{option}</option>
           ))}
         </select>
 
             <button className="login-button">
-              {data ? <Link to="/user">{data?.user?.email}</Link> : <Link to="/login">Login</Link>}
-              
+            {data ? <Link to="/user">{data?.user?.email.split('@')[0]}</Link> : <Link to="/login">Login</Link>}
             </button>
 
       </div>

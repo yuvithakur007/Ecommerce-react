@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to the E-commerce API!');
 });
 
-// get products, products details
+// get products, products details,filter
 app.use('/api/products', require('./routes/productRoutes'));
 
 //login, user details
@@ -34,6 +34,8 @@ app.use('/api/carts', require('./routes/cartRoutes'));
 
 // place order, get all orders
 app.use('/api/orders', require('./routes/orderRoutes'));
+
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

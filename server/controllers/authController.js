@@ -1,6 +1,5 @@
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
-
 const bcrypt = require('bcryptjs');
 
 exports.loginOrCreateUser = async (req, res) => {
@@ -37,44 +36,6 @@ exports.loginOrCreateUser = async (req, res) => {
   }
 };
 
-
-
-
-
-
-// exports.loginOrCreateUser = async (req, res) => {
-//   const { email, password } = req.body;
-//   // console.log(req.body);
-//   try {
-//     let user = await User.findOne({ email });
-
-//     // If user doesn't exist, create a new user
-//     if (!user) {
-//       user = new User({ email, password });
-//       await user.save();
-//     }
-
-//     // Generate JWT token
-//     const token = jwt.sign({ userId: user._id }, "knolskape");
-//     res.status(200).send({
-//       success: true,
-//       message: "Login Done",
-//       // user: {
-//       //   email: user.email,
-//       //   id: user._id,
-//       // },
-//       token: token,
-//     });
-//     // Send JWT token to the client
-//     // res.json({ token });
-//     // res.redirect('/api/products');
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ message: "Server Error" });
-//   }
-// };
-
-
 exports.getUserDetails = async (req, res) => {
   try {
     const token = req.headers.authorization;
@@ -97,6 +58,3 @@ exports.getUserDetails = async (req, res) => {
     res.status(500).json({ ok: false, message: "Internal server error" });
   }
 };
-
-
-

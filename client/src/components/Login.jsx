@@ -1,5 +1,3 @@
-// Login.js
-
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -10,7 +8,7 @@ const Login = ({handleLogout}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
+      const response = await axios.post('http://localhost:8080/api/user/login', {
         email,
         password,
       });

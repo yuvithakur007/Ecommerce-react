@@ -7,12 +7,10 @@ const Cart = () => {
 
 
   useEffect(() => {
-
-
     const fetchCartItems = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:8080/api/user/cart`, {
+        const response = await axios.get(`http://localhost:8080/api/carts`, {
           headers: {
             Authorization: token,
           },
@@ -45,19 +43,37 @@ const Cart = () => {
       }
     };
   
-    // Call the functions when the token changes
     fetchCartItems();
     fetchAllCartProducts();
   }, [cartItems]);
 
   const handleDeleteItem = async (itemId) => {
     try {
-      await axios.delete(`http://localhost:8080/api/user/cart/delete/${itemId}`);
-
+      const token = localStorage.getItem('token');
+      await axios.delete(`http://localhost:8080/api/carts/delete/${itemId}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
     } catch (error) {
       console.error('Error deleting item from cart:', error);
     }
   };
+
+  const handlePlaceOrder = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post(`http://localhost:8080/api/orders/place-order`, null, {
+        headers: {
+          Authorization: token,
+        },
+      });
+      console.log('Order placed successfully');
+    } catch (error) {
+      console.error('Error placing order:', error);
+    }
+  };
+  
 
   return (
     <div>
@@ -71,9 +87,12 @@ const Cart = () => {
             </li>
           ))}
         </ul>
+        // add place order button
+
       ) : (
         <p>No products in the cart.</p>
       )}
+       <button onClick={handlePlaceOrder}>Place Order</button>
     </div>
   );
 };
