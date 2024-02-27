@@ -18,7 +18,7 @@ const Header = () => {
   const fetchUserDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8080/api/user/userDetails", {
+      const response = await fetch("https://ecommerce-knol.onrender.com/api/user/userDetails", {
         method: "GET",
         headers: {
           Authorization: token,

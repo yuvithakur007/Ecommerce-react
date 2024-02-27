@@ -11,7 +11,7 @@ const ProductList = ({ search, category, sort }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/products", {
+        const response = await axios.get("https://ecommerce-knol.onrender.com/api/products", {
           params: {
             category: category,
             sort: sort,

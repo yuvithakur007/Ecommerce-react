@@ -10,7 +10,7 @@ const Cart = () => {
     const fetchCartItems = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`http://localhost:8080/api/carts`, {
+        const response = await axios.get(`https://ecommerce-knol.onrender.com/api/carts`, {
           headers: {
             Authorization: token,
           },
@@ -24,7 +24,7 @@ const Cart = () => {
     const fetchProduct = async (id) => {
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/products/${id}`
+          `https://ecommerce-knol.onrender.com/api/products/${id}`
         );
         return response.data;
       } catch (error) {
@@ -49,7 +49,7 @@ const Cart = () => {
   const handleDeleteItem = async (itemId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:8080/api/carts/delete/${itemId}`, {
+      await axios.delete(`https://ecommerce-knol.onrender.com/api/carts/delete/${itemId}`, {
         headers: {
           Authorization: token,
         },
@@ -62,7 +62,7 @@ const Cart = () => {
   const handlePlaceOrder = async () => {
     try {
       const token = localStorage.getItem("token");
-      await axios.post(`http://localhost:8080/api/orders/place-order`, null, {
+      await axios.post(`https://ecommerce-knol.onrender.com/api/orders/place-order`, null, {
         headers: {
           Authorization: token,
         },

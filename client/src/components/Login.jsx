@@ -9,7 +9,7 @@ const Login = ({handleLogout}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/user/login', {
+      const response = await axios.post('https://ecommerce-knol.onrender.com/api/user/login', {
         email,
         password,
       });
