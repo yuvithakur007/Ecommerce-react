@@ -1,37 +1,19 @@
-// /src/pages/Products.js
-import React, { useState } from 'react';
-import Header from '../components/Header';
-import ProductList from '../components/ProductList';
-import Footer from '../components/Footer';
+import React from 'react';
+import ProductList from '../components/ProductList'; 
+import SideBar from '../components/SideBar'; 
 
-const Products = () => {
-  const [search, setSearch] = useState("");
-  const [category, setCategory] = useState("All");
-  const [sort, setSort] = useState("None");
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
-  
-  const handleFilterByCategory= (e) => {
-    setCategory(e.target.value);
-  }
-
-  const handleSortBy = (e) => {
-    setSort(e.target.value);
-  }
-
-
+const Products = (props) => {
+  console.log(props);
   return (
-    <div>
-      <Header handleSearch={handleSearch} 
-              handleFilterByCategory={handleFilterByCategory} 
-              handleSortBy={handleSortBy}/>
-      <ProductList search={search} 
-                  category={category} 
-                  sort={sort}/>
-      <Footer/>
-    </div>
+    <div className='product-sidebar'>
+      <div className='poductsSide'>
+      <ProductList search={props.search} category={props.category} sort={props.sort} /></div>
+      <div className='productsSidebar'>
+
+        
+      <SideBar handleSearch={props.handleSearch} handleSortBy = {props.handleSortBy} handleFilterByCategory = {props.handleFilterByCategory}  />
+
+      </div>    </div>
   );
 }
 

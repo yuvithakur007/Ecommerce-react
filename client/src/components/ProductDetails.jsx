@@ -1,8 +1,7 @@
-// ProductDetails.js
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import "../styles/details.css";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -29,6 +28,7 @@ const ProductDetails = () => {
   const handleClick = (e) => {
     e.preventDefault();
 
+  if (localStorage.getItem('token')) {
     fetch("http://localhost:8080/api/carts/additem", {
       method: "POST",
       headers: {
@@ -37,25 +37,30 @@ const ProductDetails = () => {
       },
       body: JSON.stringify({ id: product._id }),
     });
+  } else {
+    if (window.confirm('"Please Login to add to cart"')) {
+      window.location.href = '/login';
+    }
+  }
   };
 
   return (
     <div className="product-details-container">
       {product && (
         <div className="product-details">
-          <div className="product-image">
+          <div className="product-details-image">
             <img src={product.image} alt={product.name} />
           </div>
           <div className="product-info">
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-            <div className="product-actions">
-
-            {/* <button onClick={handleClick}>
-               Buy now
-              </button> */}
-
+            <h2 className="product-details-name">{product.name}</h2>
+            <p className="product-details-description">{product.description}</p>
+            <p className="product-details-category">Category: {product.category}</p>
+            <div className="details-rating">
+              <span>Rating: ★{product.avgRating}</span>
+            </div>
+  
+            <p className="product-details-price">Price: ${product.price}</p>
+            <div className="product-details-actions">
               <button onClick={handleClick}>
                 Add to cart
               </button>
@@ -64,7 +69,7 @@ const ProductDetails = () => {
         </div>
       )}
     </div>
-  );
+  );  
 };
 
 export default ProductDetails;

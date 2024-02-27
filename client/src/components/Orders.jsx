@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../styles/order.css'
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -46,22 +47,38 @@ const Orders = () => {
     fetchAllOrderProducts();
   }, [orders]);
 
+
   return (
-    <div>
+    <div className="orders-container">
       <h2>Orders</h2>
       {orderProducts.length > 0 ? (
-        <ul>
-          {orderProducts.map(order => (
-            <li key={order._id}>
-              {order.name} - ${order.price}
-            </li>
-          ))}
-        </ul>
+        <div className="order-products">
+          <table className="order-table">
+            <thead>
+              <tr className="order-table-header">
+                <th>Order</th>
+                <th>Name</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orderProducts.map( (order,index) => (
+                <tr key={index} className="order-item">
+                  <td>{index}</td>
+                  <td>{order.name}</td>
+                  <td>${order.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       ) : (
         <p>No orders available</p>
       )}
     </div>
   );
+  
+  
 };
 
 export default Orders;

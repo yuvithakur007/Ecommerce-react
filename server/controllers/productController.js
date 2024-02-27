@@ -15,9 +15,11 @@ exports.getAllProducts = async (req, res) => {
   const category = req.query.category;
   const sort = req.query.sort;
   let products;
-  console.log(req.query);
+  // console.log(req.query);
   try {
-    if (category === 'All' || sort === 'None') {
+
+    // switch use
+    if (category === 'All') {
       products = await Product.find();
     } else {
       products = await Product.find({ category });
@@ -32,9 +34,13 @@ exports.getAllProducts = async (req, res) => {
     if (sort === 'Rating: Low to High') {
       products = products.sort((a, b) => a.avgRating - b.avgRating);
     }
+    if(sort === 'Rating: High to Low') {
+      products = products.sort((a, b) => b.avgRating - a.avgRating);
+    }
     if (!products || products.length === 0) {
       return res.status(404).json({ message: 'No products found' });
     }
+    // console.log(products.length);
     res.json(products);
   }
   catch (err) {

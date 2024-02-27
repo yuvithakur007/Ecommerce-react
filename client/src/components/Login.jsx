@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../styles/login.css';
 
 const Login = ({handleLogout}) => {
   const [email, setEmail] = useState('');
@@ -12,27 +13,25 @@ const Login = ({handleLogout}) => {
         email,
         password,
       });
-      console.log('Login successful:', response.data);
+      // console.log('Login successful:', response.data);
       localStorage.setItem("token", response.data.token);
-      // Redirect to another page after successful login, such as the home page
+        if (window.confirm('LogIn Successfull')) {
+          window.location.href = '/';
+        } else {
+          window.location.href = '/';
+        }
     } catch (error) {
       console.error('Error logging in:', error);
     }
   };
 
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-//       <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-//       <button type="submit">Login</button>
-//     </form>
-//   );
-// };
-
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="login-container">
+      {/* <br /> */}
+
+      <form onSubmit={handleSubmit} className="login-form">
+      <p>Login</p>
+
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -51,11 +50,10 @@ const Login = ({handleLogout}) => {
           onChange={(e) => setPassword(e.target.value)}
           required
         /><br />
-
-        <button type="submit" onClick={handleLogout}>Login</button>
+        <button type="submit" className="login-button">Login</button>
       </form>
     </div>
-  );
+  );  
 };
 
 export default Login;
