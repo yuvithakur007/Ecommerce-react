@@ -17,7 +17,7 @@ const ProductDetails = () => {
   const fetchProduct = async (id) => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/products/${id}`
+        `https://ecommerce-knol.onrender.com/api/products/${id}`
       );
       setProduct(response.data);
     } catch (error) {
@@ -29,7 +29,7 @@ const ProductDetails = () => {
     e.preventDefault();
 
   if (localStorage.getItem('token')) {
-    fetch("http://localhost:8080/api/carts/additem", {
+    fetch("https://ecommerce-knol.onrender.com/api/carts/additem", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
