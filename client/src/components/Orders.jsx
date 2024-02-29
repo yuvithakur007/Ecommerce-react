@@ -10,7 +10,7 @@ const Orders = () => {
     const fetchCartItems = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`https://ecommerce-knol.onrender.com/api/orders`, {
+        const response = await axios.get(`http://localhost:8080/api/orders`, {
           headers: {
             Authorization: token,
           },
@@ -25,7 +25,7 @@ const Orders = () => {
     const fetchProduct = async (id) => {
             try {
               const response = await axios.get(
-                `https://ecommerce-knol.onrender.com/api/products/${id}`
+                `http://localhost:8080/api/products/${id}`
               );
               return response.data;
             } catch (error) {
@@ -64,7 +64,8 @@ const Orders = () => {
             <tbody>
               {orderProducts.map( (order,index) => (
                 <tr key={index} className="order-item">
-                  <td>{index}</td>
+                  <td>
+                    {index+1}</td>
                   <td>{order.name}</td>
                   <td>${order.price}</td>
                 </tr>
@@ -75,7 +76,7 @@ const Orders = () => {
       ) : (
         <div>
           <p style={{ margin: "1.5rem" }}>No orders available.</p>
-          <p>Loading...</p>
+          {/* <p>Loading...</p> */}
 
         </div>
 

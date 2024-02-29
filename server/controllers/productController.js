@@ -1,6 +1,5 @@
 const Product = require('../models/Product');
 
-
 // exports.getAllProducts = async (req, res) => {
 //   try {
 //     const products = await Product.find();
@@ -9,7 +8,6 @@ const Product = require('../models/Product');
 //     res.status(500).json({ message: 'Server Error' });
 //   }
 // };
-
 
 exports.getAllProducts = async (req, res) => {
   const category = req.query.category;
@@ -80,35 +78,3 @@ exports.addProduct = async (req, res) => {
     res.status(500).json({ message: 'Server Error' });
   }
 }
-
-// exports.getFilterProducts = async (req,res) => {
-//   const category = req.query.category;
-//   const sort = req.query.sort;
-//   let products;
-//   try {
-//     if (category === 'All') {
-//       products = await Product.find();
-//     } else {
-//       products = await Product.find
-//       ({category
-//       });
-//       }
-//     if (sort === 'Price: Low to High') {
-//       products = products.sort((a, b) => a.price - b.price);
-//     }
-//     if (sort === 'Price: High to Low') {
-//       products = products.sort((a, b) => b.price - a.price);
-//     }
-//     if (sort === 'Rating: Low to High') {
-//       products = products.sort((a, b) => a.avgRating - b.avgRating);
-//     }
-//     if (!products || products.length ===
-//       0) {
-//       return res.status(404).json({ message: 'No products found' });
-//     }
-//     res.json(products);
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: 'Server Error' });
-//   }
-// };

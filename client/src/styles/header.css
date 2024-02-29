@@ -1,7 +1,10 @@
 .navbar {
   display: flex;
   width: 100%;
-  /* position: fixed; */
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  padding-top: 4rem;
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem; 
@@ -54,6 +57,17 @@
   border-radius: 0.3125rem; 
   cursor: pointer;
   text-decoration: none;
+  position:relative;
+}
+
+.logout-button{
+  position:absolute;
+  top:2rem;
+  right:0.1rem;
+}
+.logout-button button{
+  
+  background-color: grey;
 }
 
 .login-button:hover {

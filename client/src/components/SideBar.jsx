@@ -20,6 +20,7 @@ export default function SideBar({handleSearch, handleSortBy, handleFilterByCateg
     <div>
       <div className="sidebar">
         <div className="SideBar-display">
+          
           <input
             type="text"
             placeholder="Search products..."

@@ -1,11 +1,10 @@
-// controllers/orderController.js
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 
 exports.placeOrder = async (req, res) => {
   try {
     const token = req.headers.authorization;
-    const decodedToken = jwt.verify(token, "knolskape");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.userId;
     
     const user = await User.findById(userId);
@@ -31,7 +30,7 @@ exports.placeOrder = async (req, res) => {
 exports.getAllOrders = async (req, res) => {
   try {
     const token = req.headers.authorization;
-    const decodedToken = jwt.verify(token, "knolskape");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.userId;
 
     const user = await User.findById(userId);

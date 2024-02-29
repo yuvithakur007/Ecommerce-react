@@ -1,5 +1,6 @@
 .cart-container {
     text-align: center;
+    margin-top:4rem;
   }
   
   .cart-products {
@@ -28,12 +29,6 @@
   .cart-item:last-child {
     border-bottom: none;
   }
-  /* .cart-item img{
-    width: 20%;
-    height: 3rem; 
-    object-fit: cover; 
-
-  } */
   .cart-item-image{
     width: 3rem;
     border-radius: 50%; 
@@ -59,6 +54,7 @@
     border: none;
     border-radius: 0.25rem;
     cursor: pointer;
+    text-decoration: none;
   }
   
   button:hover {

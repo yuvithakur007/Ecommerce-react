@@ -18,7 +18,7 @@ const Header = () => {
   const fetchUserDetails = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("https://ecommerce-knol.onrender.com/api/user/userDetails", {
+      const response = await fetch("http://localhost:8080/api/user/userDetails", {
         method: "GET",
         headers: {
           Authorization: token,
@@ -55,12 +55,21 @@ const Header = () => {
         </nav>
 
         
+        {/* <div className="darkmode-button">
+          <div className="darkmode-toggle">
+            <button> 
+              Dark
+            </button>
+          </div>
+        </div> */}
+
+
           <button className="login-button" onClick={() => setToggle(!toggle)}>
             {isLoggedIn ? (
               <>
                 <div>{userData ? userData?.user?.email.split("@")[0] : null}</div>
                 {toggle && (
-                  <div>
+                  <div className="logout-button"> 
                     <button onClick={handleLogout}>Logout</button>
                   </div>
                 )}
@@ -69,6 +78,7 @@ const Header = () => {
               <Link to="/login">Login</Link>
             )}
           </button>
+
           
         </div>
     </header>

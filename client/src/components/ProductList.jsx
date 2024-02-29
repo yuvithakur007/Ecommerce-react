@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import { Link } from 'react-router-dom';
 import ProductCard from "./ProductCard";
 import "../styles/products.css";
 
@@ -8,10 +7,11 @@ const ProductList = ({ search, category, sort }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
+  // from backend: category, sort
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("https://ecommerce-knol.onrender.com/api/products", {
+        const response = await axios.get("http://localhost:8080/api/products", {
           params: {
             category: category,
             sort: sort,
@@ -26,6 +26,7 @@ const ProductList = ({ search, category, sort }) => {
     fetchProducts();
   }, [category, sort]);
 
+  // from frontend: search
   useEffect(() => {
     const filteredProducts = products.filter((product) => {
       const productNameIncludesSearch = product.name
@@ -41,8 +42,6 @@ const ProductList = ({ search, category, sort }) => {
 
   return (
     <>
-      {/* <h2>Product List</h2> */}
-
       <div className="product-list">
         {filteredProducts.map((product) => (
           <div className="individualProductBox">

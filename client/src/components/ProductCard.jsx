@@ -36,7 +36,6 @@ export default function ProductCard(props) {
           </Link>
           </div>
         </div>
-      
     </>
   );
 }

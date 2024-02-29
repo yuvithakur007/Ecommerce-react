@@ -9,7 +9,6 @@ exports.loginOrCreateUser = async (req, res) => {
 
     // If user doesn't exist, create a new user
     if (!user) {
-      // Hash the password
       const hashedPassword = await bcrypt.hash(password, 10);
 
       user = new User({ email, password: hashedPassword });
@@ -23,7 +22,7 @@ exports.loginOrCreateUser = async (req, res) => {
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userId: user._id }, "knolskape");
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
     res.status(200).send({
       success: true,
       message: "Login Done",
@@ -39,7 +38,7 @@ exports.loginOrCreateUser = async (req, res) => {
 exports.getUserDetails = async (req, res) => {
   try {
     const token = req.headers.authorization;
-    const decodedToken = jwt.verify(token, "knolskape");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.userId;
 
     const user = await User.findById(userId);

@@ -5,7 +5,6 @@ const OrdersPage = () => {
   return (
     <div>
       <Orders />
-      {/* <Footer/> */}
     </div>
   );
 }

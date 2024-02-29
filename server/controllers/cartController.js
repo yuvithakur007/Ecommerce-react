@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 exports.getUserCart = async (req, res) => {
   try {
     const token = req.headers.authorization;
-    const decodedToken = jwt.verify(token, "knolskape");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.userId;
     const user = await User.findById(userId);
 
@@ -23,7 +23,7 @@ exports.getUserCart = async (req, res) => {
 exports.addToCart = async (req, res) => {
   try {
     const token = req.headers.authorization;
-    const decodedTeken = jwt.verify(token, "knolskape");
+    const decodedTeken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedTeken.userId;
     const user = await User.findById(userId);
     if (!user.cart.includes(req.body.id)) {
@@ -52,7 +52,7 @@ exports.addToCart = async (req, res) => {
 exports.deleteFromCart = async (req, res) => {
   try {
     const token = req.headers.authorization;
-    const decodedToken = jwt.verify(token, "knolskape");
+    const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.userId;
 
     const user = await User.findById(userId);

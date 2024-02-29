@@ -9,7 +9,7 @@ const Login = ({handleLogout}) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://ecommerce-knol.onrender.com/api/user/login', {
+      const response = await axios.post('http://localhost:8080/api/user/login', {
         email,
         password,
       });
@@ -26,6 +26,7 @@ const Login = ({handleLogout}) => {
   };
 
   return (
+    <div className="login-box">
     <div className="login-container">
       <p>Login</p>
       <form onSubmit={handleSubmit} className="login-form">
@@ -47,9 +48,10 @@ const Login = ({handleLogout}) => {
           onChange={(e) => setPassword(e.target.value)}
           required
         /><br />
-        <button type="submit" className="login-button">Login</button>
+        <button type="submit" className="login">Login</button>
       </form>
     </div>
+  </div>  
   );  
 };
 
