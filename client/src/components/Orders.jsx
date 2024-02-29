@@ -50,13 +50,13 @@ const Orders = () => {
 
   return (
     <div className="orders-container">
-      <h2>Orders</h2>
+      <h1>Orders</h1>
       {orderProducts.length > 0 ? (
         <div className="order-products">
           <table className="order-table">
             <thead>
               <tr className="order-table-header">
-                <th>Order</th>
+                <th>Number</th>
                 <th>Name</th>
                 <th>Price</th>
               </tr>
@@ -73,7 +73,12 @@ const Orders = () => {
           </table>
         </div>
       ) : (
-        <p>No orders available</p>
+        <div>
+          <p style={{ margin: "1.5rem" }}>No orders available.</p>
+          <p>Loading...</p>
+
+        </div>
+
       )}
     </div>
   );

@@ -75,7 +75,7 @@ const Cart = () => {
 
   return (
     <div className="cart-container">
-      <h2>Cart</h2>
+      <h1>Cart</h1>
       {cartProducts.length > 0 ? (
         <div className="cart-products">
           <table className="cart-table">
@@ -120,7 +120,10 @@ const Cart = () => {
           <button onClick={handlePlaceOrder}>Place Order</button>
         </div>
       ) : (
-        <p style={{ margin: "1.5rem" }}>No products in the cart.</p>
+        <div>
+             <p style={{ margin: "1.5rem" }}>No products in the cart.</p>
+        <p>Loading...</p>
+        </div>
       )}
     </div>
   );

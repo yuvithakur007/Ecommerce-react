@@ -27,11 +27,8 @@ const Login = ({handleLogout}) => {
 
   return (
     <div className="login-container">
-      {/* <br /> */}
-
-      <form onSubmit={handleSubmit} className="login-form">
       <p>Login</p>
-
+      <form onSubmit={handleSubmit} className="login-form">
         <label htmlFor="email">Email:</label>
         <input
           type="email"

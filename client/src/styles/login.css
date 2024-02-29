@@ -6,7 +6,7 @@
   
   .login-form {
     /* margin-top: 5rem; */
-    margin: 5rem auto 2rem;
+    margin: 2rem auto 2rem;
     width: 20rem; 
   }
   
@@ -24,6 +24,6 @@
     border-radius: 0.3125rem;
   }
   
-  .login-button{
+  /* .login-button{
 
-  }
+  } */
