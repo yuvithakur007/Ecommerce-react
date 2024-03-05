@@ -1,3 +1,20 @@
+.dark-mode .sidebar {
+  background-color: #333; 
+  color: #333;
+}
+
+.dark-mode .sideBar-display input[type="text"],
+.dark-mode .sideBar-display select {
+  border-color: #333; 
+}
+.dark-mode .search-icon {
+  color: #333;
+}
+
+.dark-mode .search-icon {
+  color: #333;
+}
+
 .product-sidebar {
   display: flex;
   flex-direction: row;

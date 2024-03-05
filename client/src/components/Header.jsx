@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/header.css";
+import { useDarkMode } from '../context/DarkModeContext';
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [userData, setUserData] = useState(null);
+  const { state, dispatch } = useDarkMode(); 
 
   useEffect(() => {
     const userLoggedIn = localStorage.getItem("token") !== null;
@@ -37,8 +39,13 @@ const Header = () => {
     setUserData(null);
   };
 
+  const toggleDarkMode = () => {
+    dispatch({ type: 'TOGGLE_DARK_MODE' }); 
+    
+  };
+
   return (
-    <header>
+    <header className={state.darkMode ? 'dark-mode' : 'light-mode'}> 
       <div className="navbar">
         <nav>
           <ul className="navbar-links">
@@ -54,33 +61,29 @@ const Header = () => {
           </ul>
         </nav>
 
-        
-        {/* <div className="darkmode-button">
+        <div className="darkmode-button">
           <div className="darkmode-toggle">
-            <button> 
-              Dark
+            <button onClick={toggleDarkMode}>
+              {state.darkMode ? 'Light Mode' : 'Dark Mode'} 
             </button>
           </div>
-        </div> */}
-
-
-          <button className="login-button" onClick={() => setToggle(!toggle)}>
-            {isLoggedIn ? (
-              <>
-                <div>{userData ? userData?.user?.email.split("@")[0] : null}</div>
-                {toggle && (
-                  <div className="logout-button"> 
-                    <button onClick={handleLogout}>Logout</button>
-                  </div>
-                )}
-              </>
-            ) : (
-              <Link to="/login">Login</Link>
-            )}
-          </button>
-
-          
         </div>
+
+        <button className="login-button" onClick={() => setToggle(!toggle)}>
+          {isLoggedIn ? (
+            <>
+              <div>{userData ? userData?.user?.email.split("@")[0] : null}</div>
+              {toggle && (
+                <div className="logout-button">
+                  <button onClick={handleLogout}>Logout</button>
+                </div>
+              )}
+            </>
+          ) : (
+            <Link to="/login">Login</Link>
+          )}
+        </button>
+      </div>
     </header>
   );
 };

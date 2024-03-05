@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/order.css'
+import { useDarkMode } from '../context/DarkModeContext';
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [orderProducts, setOrderProducts] = useState([]);
-
+  const {state} = useDarkMode();
   useEffect(() => {
     const fetchCartItems = async () => {
       try {
@@ -49,6 +50,8 @@ const Orders = () => {
 
 
   return (
+    <div className={state.darkMode ? 'dark-mode' : 'light-mode'}>
+
     <div className="orders-container">
       <h1>Orders</h1>
       {orderProducts.length > 0 ? (
@@ -81,6 +84,7 @@ const Orders = () => {
         </div>
 
       )}
+    </div>
     </div>
   );
   

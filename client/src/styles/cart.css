@@ -1,63 +1,99 @@
 .cart-container {
-    text-align: center;
-    margin-top:4rem;
-  }
-  
-  .cart-products {
-    margin-top: 1.3rem; 
-  }
-  
-  .cart-table {
-    width: 60%;
-    border-collapse: collapse;
-    margin: 0 auto;
-    border: 0.05rem solid #ddd;
-  }
-  
-  .cart-table-header {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
-  
-  .cart-table th,
-  .cart-table td {
-    padding: 0.5rem 1rem;
-    
-    border-bottom: 0.01rem solid #ddd;
-  }
-  
-  .cart-item:last-child {
-    border-bottom: none;
-  }
-  .cart-item-image{
-    width: 3rem;
-    border-radius: 50%; 
-    object-fit: contain;
-    padding: 0.25rem;
-    border: 0.1rem solid rgba(0, 128, 0, 0.881);
-  }
-  
-  .cart-item td:last-child {
-    text-align: center;
-  }
-  
-  .total-amount {
-    margin-top: 1.5rem; 
-    margin-bottom: 1rem;
-    /* color:dodgerblue */
-  }
-  
-  button {
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    text-decoration: none;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
+  text-align: center;
+  padding-top: 4rem;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.dark-mode .cart-container {
+  color: #fff;
+  background-color: #333;
+}
+
+.cart-products {
+  margin-top: 1.3rem;
+}
+
+.cart-table {
+  width: 60%;
+  border-collapse: collapse;
+  margin: 0 auto;
+  border: 0.05rem solid #ddd;
+}
+
+.cart-table-header {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.cart-table th,
+.cart-table td {
+  padding: 0.5rem 1rem;
+  border-bottom: 0.01rem solid #ddd;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.cart-item-image {
+  width: 3rem;
+  border-radius: 50%;
+  object-fit: contain;
+  padding: 0.25rem;
+  border: 0.1rem solid rgba(0, 128, 0, 0.881);
+}
+
+.cart-item td:last-child {
+  text-align: center;
+}
+
+.total-amount {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.dark-mode .total-amount {
+  color: #fff; 
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+.dark-mode button {
+  background-color: #0056b3;
+}
+
+.dark-mode .cart-table-header {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .cart-table {
+  border-color: #666;
+}
+
+.dark-mode .cart-item{
+  border-color: #666;
+}
+
+.dark-mode .cart-item td {
+  border-color: #666;
+}
+
+.dark-mode .cart-table th, .cart-table td {
+  padding: 0.5rem 1rem;
+  border-bottom: 0.01rem solid #666;
+}

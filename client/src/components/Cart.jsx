@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/cart.css";
+import { useDarkMode } from '../context/DarkModeContext'; // Import useDarkMode hook
 
 const Cart = () => {
+  const { state } = useDarkMode(); // Access dark mode state from context
+
   const [cartItems, setCartItems] = useState([]);
   const [cartProducts, setCartProducts] = useState([]);
 
@@ -74,57 +77,59 @@ const Cart = () => {
   };
 
   return (
-    <div className="cart-container">
-      <h1>Cart</h1>
-      {cartProducts.length > 0 ? (
-        <div className="cart-products">
-          <table className="cart-table">
-            <thead>
-              <tr className="cart-table-header">
-                <th>Name</th>
-                <th>Price</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartProducts.map((item) => (
-                <tr key={item._id} className="cart-item">
-                  <td style={{ paddingRight: "0rem" }}>
-                    <img className="cart-item-image"
-                      src={item.image}
-                      alt={item.name}
-                    />
-                    <br />
-                    {item.name}
-                  </td>
-
-                  <td>${item.price}</td>
-                  <td>
-                    <button onClick={() => handleDeleteItem(item._id)}>
-                      Delete
-                    </button>
-                  </td>
+    <div className={state.darkMode ? 'dark-mode' : 'light-mode'}> 
+      <div className="cart-container">
+        <h1>Cart</h1>
+        {cartProducts.length > 0 ? (
+          <div className="cart-products">
+            <table className="cart-table">
+              <thead>
+                <tr className="cart-table-header">
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Action</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-          <div className="total-amount">
-            <p>
-              Total: $
-              {cartProducts.reduce(
-                (total, product) => total + product.price,
-                0
-              )}
-            </p>
+              </thead>
+              <tbody>
+                {cartProducts.map((item) => (
+                  <tr key={item._id} className="cart-item">
+                    <td style={{ paddingRight: "0rem" }}>
+                      <img className="cart-item-image"
+                        src={item.image}
+                        alt={item.name}
+                      />
+                      <br />
+                      {item.name}
+                    </td>
+
+                    <td>${item.price}</td>
+                    <td>
+                      <button onClick={() => handleDeleteItem(item._id)}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <div className="total-amount">
+              <p>
+                Total: $
+                {cartProducts.reduce(
+                  (total, product) => total + product.price,
+                  0
+                )}
+              </p>
+            </div>
+            <button onClick={handlePlaceOrder}>Place Order</button>
           </div>
-          <button onClick={handlePlaceOrder}>Place Order</button>
-        </div>
-      ) : (
-        <div>
-             <p style={{ margin: "1.5rem" }}>No products in the cart.</p>
-        <p>Loading...</p>
-        </div>
-      )}
+        ) : (
+          <div>
+               <p style={{ margin: "1.5rem" }}>No products in the cart.</p>
+          <p>Loading...</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

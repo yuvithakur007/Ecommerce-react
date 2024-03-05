@@ -1,12 +1,34 @@
+
 .login-box {
-  width: 20rem;
-  margin: 0 auto;
+  /* height: 100%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+  height: 100%;
+  /* height: 50%; */
+  /* width: 20rem; */
+  /* margin: 0 auto; */
+
+  /* border: 0.0625rem solid #ccc;
+  border-radius: 0.3125rem;
+  margin: 4rem 1.25rem 1.25rem 1.25rem;
+  box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1); */
+}
+
+.login-container{
   border: 0.0625rem solid #ccc;
   border-radius: 0.3125rem;
-  margin-top: 4rem;
-  padding: 1.25rem;
+  margin: 4rem auto;
   box-shadow: 0 0 0.625rem rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  justify-content: center;
+  width: 20rem;
+  align-items: flex-start;
+  background-color: #f4f4f4;
+
 }
+
 
 .login-container p {
   text-align: center;
@@ -43,4 +65,42 @@
 
 .login:hover {
   background-color: #0056b3;
+}
+
+.dark-mode .login-box {
+  border-color: #333;
+  background-color: #333;
+  color: #fff;
+  box-shadow: 0 0 0.625rem rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .login-form input[type="email"],
+.dark-mode .login-form input[type="password"] {
+  border-color: #fff;
+}
+
+.dark-mode .login {
+  background-color: #0056b3;
+}
+
+.dark-mode .login:hover {
+  background-color: #004080;
+}
+
+.dark-mode .login-container{
+  color: #fff;
+  background-color: #666;
+}
+
+.dark-mode .login-container p {
+  color: #fff;
+}
+
+.dark-mode .login-box {
+  background-color: #333;
+  color: #fff; 
+}
+
+.dark-mode .login-form{
+  color: #fff;
 }

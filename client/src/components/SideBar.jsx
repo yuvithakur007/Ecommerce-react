@@ -1,7 +1,14 @@
 import React from "react";
 import "../styles/sidebar.css";
+import { useDarkMode } from '../context/DarkModeContext'; 
 
-export default function SideBar({handleSearch, handleSortBy, handleFilterByCategory}) {
+export default function SideBar({
+  handleSearch,
+  handleSortBy,
+  handleFilterByCategory,
+}) {
+  const { state } = useDarkMode(); 
+
   const categories = [
     "All",
     "smartphones",
@@ -16,15 +23,16 @@ export default function SideBar({handleSearch, handleSortBy, handleFilterByCateg
     "Rating: Low to High",
     "Rating: High to Low",
   ];
+
   return (
-    <div>
+    <div className={state.darkMode ? 'dark-mode' : 'light-mode'}> 
       <div className="sidebar">
         <div className="SideBar-display">
-          
           <input
             type="text"
             placeholder="Search products..."
-            onChange={handleSearch}/>
+            onChange={handleSearch}
+          />
 
           <select onChange={handleFilterByCategory}>
             {categories.map((category, index) => (
@@ -41,7 +49,6 @@ export default function SideBar({handleSearch, handleSortBy, handleFilterByCateg
               </option>
             ))}
           </select>
-
         </div>
       </div>
     </div>

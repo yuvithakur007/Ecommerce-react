@@ -1,3 +1,15 @@
+
+/* Apply dark mode styles conditionally */
+.dark-mode body {
+  background-color: #333;
+  /* color: #fff; */
+}
+
+.dark-mode a {
+  color: #fff;
+}
+
+
 .navbar {
   display: flex;
   width: 100%;
@@ -8,8 +20,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem; 
-  background-color: #333;
-  color: #fff
+  background-color: #fff; 
 }
 
 .navbar-links {
@@ -24,7 +35,7 @@
 }
 
 .navbar-links li a {
-  color: #fff;
+  color: inherit; 
   text-decoration: none;
 }
 
@@ -51,7 +62,6 @@
 
 .login-button {
   background-color: #007bfa;
-  color: #fff;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 0.3125rem; 
@@ -66,10 +76,23 @@
   right:0.1rem;
 }
 .logout-button button{
-  
   background-color: grey;
 }
 
 .login-button:hover {
   background-color: #0056b3;
 }
+
+.dark-mode {
+  background-color: #333; 
+  color: #333;
+}
+
+.dark-mode .navbar {
+  background-color: #333; 
+  color: #fff; 
+}
+
+.dark-mode .navbar-links li a {
+  color: #fff;
+  }

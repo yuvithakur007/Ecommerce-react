@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import "../styles/details.css";
+import { useDarkMode } from "../context/DarkModeContext";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const { state } = useDarkMode();
 
   useEffect(() => {
     console.log("Product ID:", id);
@@ -45,6 +47,7 @@ const ProductDetails = () => {
   };
 
   return (
+    <div className={state.darkMode ? "dark-mode" : "light-mode"}>
     <div className="product-details-container">
       {product && (
         <div className="product-details">
@@ -68,6 +71,7 @@ const ProductDetails = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );  
 };

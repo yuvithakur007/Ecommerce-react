@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ProductCard from "./ProductCard";
 import "../styles/products.css";
+import { useDarkMode } from '../context/DarkModeContext'; 
 
 const ProductList = ({ search, category, sort }) => {
+  const { state } = useDarkMode(); 
+
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  // from backend: category, sort
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -17,7 +19,6 @@ const ProductList = ({ search, category, sort }) => {
             sort: sort,
           },
         });
-        // console.log(response.data);
         setProducts(response.data);
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -26,7 +27,6 @@ const ProductList = ({ search, category, sort }) => {
     fetchProducts();
   }, [category, sort]);
 
-  // from frontend: search
   useEffect(() => {
     const filteredProducts = products.filter((product) => {
       const productNameIncludesSearch = product.name
@@ -42,19 +42,21 @@ const ProductList = ({ search, category, sort }) => {
 
   return (
     <>
-      <div className="product-list">
-        {filteredProducts.map((product) => (
-          <div className="individualProductBox">
-            <ProductCard
-              key={product._id}
-              image={product.image}
-              name={product.name}
-              avgRating={product.avgRating}
-              price={product.price}
-              id={product._id}
-            />
-          </div>
-        ))}
+      <div className={state.darkMode ? 'dark-mode' : 'light-mode'}> 
+        <div className="product-list">
+          {filteredProducts.map((product) => (
+            <div className="individualProductBox">
+              <ProductCard
+                key={product._id}
+                image={product.image}
+                name={product.name}
+                avgRating={product.avgRating}
+                price={product.price}
+                id={product._id}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );

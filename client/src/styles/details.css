@@ -3,6 +3,7 @@
   justify-content: center;
   align-items: center;
   padding: 1.25rem;
+  min-height: 100vh;
 }
 
 .product-details {
@@ -15,19 +16,21 @@
   border-radius: 0.5rem;
 }
 
-.product-description {
+
+.product-details-description,
+.product-info,
+.product-details-category {
   margin-bottom: 0.5rem;
   margin-left: 1rem;
-  color: #666; 
+  color: #666;
 }
 
-.product-info {
-  /* flex: 2; */
-  margin-bottom: 0.5rem;
+.product-details-price,
+.product-details-name,
+.details-rating {
+  margin-bottom: 0.3rem;
   margin-left: 1rem;
-  color: #666; 
-  margin-bottom: 0.5rem;
-  color: #777; 
+  color: #333;
 }
 
 .product-actions button {
@@ -39,18 +42,32 @@
   transition: background-color 0.3s;
 }
 
-.product-actions  button:hover {
+.product-actions button:hover {
   background-color: #0056b3;
 }
 
-
-.rating{
-  margin-bottom: 0.3rem; 
-  color:burlywood;
+.rating {
+  margin-bottom: 0.3rem;
+  color: burlywood;
   margin-left: 1rem;
 }
-/* //////////////////////////////// */
 
+
+.dark-mode .product-details-description,
+.dark-mode .product-info,
+.dark-mode .product-details-category {
+  color: #fff;
+}
+
+.dark-mode .product-details-price,
+.dark-mode .product-details-name,
+.dark-mode .details-rating {
+  color: #fff;
+}
+
+.dark-mode .product-actions button {
+  background-color: #0056b3;
+}
 
 .product-details-actions button {
   background-color: #007bff;
@@ -60,46 +77,16 @@
   border-radius: 0.5rem;
 }
 
-.product-details-actions button:hover
-{
+.product-details-actions button:hover {
   background-color: #0056b3;
 }
 
-.details-rating{
-  margin-bottom: 0.3rem; 
-  color:burlywood;
-  margin-left: 1rem;
-}
-
-.product-details-category {
-  margin-bottom: 0.5rem;
-  margin-left: 1rem;
-  color: #777; 
-}
-.product-details-description{
-  margin-bottom: 0.5rem;
-  margin-left: 1rem;
-  color: #666; 
-}
-
-.product-details-price {
-  margin-bottom: 0.3rem; 
-  color:dodgerblue;
-  margin-left: 1rem;
-}
-
-.product-details-name {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-  color: #333; 
-  margin-left: 1rem;
-}
-
 @media screen and (max-width: 768px) {
-  .product-details img{
-    width:100%;
-  }  
-  .product-info{
+  .product-details img {
+    width: 100%;
+  }
+
+  .product-info {
     margin-left: 0;
   }
 }
