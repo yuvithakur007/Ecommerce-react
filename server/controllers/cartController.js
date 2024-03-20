@@ -58,7 +58,6 @@ exports.deleteFromCart = async (req, res) => {
     const user = await User.findById(userId);
     const itemId = req.params.id; 
 
-    // Check if the user's cart includes the item
     const index = user.cart.indexOf(itemId);
     if (index !== -1) {
       user.cart.splice(index, 1);

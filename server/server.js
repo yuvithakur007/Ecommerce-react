@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to the E-commerce API!');
 });
 
-// get products, products details
+// get products, products details, products ids
 app.use('/api/products', require('./routes/productRoutes'));
 
 //login, user details

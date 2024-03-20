@@ -1,13 +1,21 @@
+const { isDataView } = require('util/types');
 const Product = require('../models/Product');
 
-// exports.getAllProducts = async (req, res) => {
-//   try {
-//     const products = await Product.find();
-//     res.json(products);
-//   } catch (error) {
-//     res.status(500).json({ message: 'Server Error' });
-//   }
-// };
+exports.getIds = async (req, res) => {
+  try {
+    const products = await Product.find({}, "_id");
+    if (!products || products.length === 0) {
+      return res.status(404).json({ message: 'No products found' });
+    }
+    const ids = products.map(product => product._id);
+    res.json(ids);
+  }
+    // res.json(products);
+   catch (error) {
+    console.log("h3");
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
 
 exports.getAllProducts = async (req, res) => {
   const category = req.query.category;
@@ -38,7 +46,6 @@ exports.getAllProducts = async (req, res) => {
     if (!products || products.length === 0) {
       return res.status(404).json({ message: 'No products found' });
     }
-    // console.log(products.length);
     res.json(products);
   }
   catch (err) {
