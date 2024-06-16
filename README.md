@@ -17,7 +17,7 @@ After sorting the item:
 
 
 ## 🔗 Links
-https://ecom-next-migrate.vercel.app/
+https://ecommerce-knol.vercel.app/
 
 
 ## Tech Stack
